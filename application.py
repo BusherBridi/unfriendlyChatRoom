@@ -24,10 +24,7 @@ socketio = SocketIO(app)
 def index():
     return render_template("index.html")
 
-@socketio.on("post message")
-def message(data):
-    msg = data["message"]
-    emit("broadcast message", {"message":msg}, broadcast=True)
+
 
 @app.route("/login", methods = ["POST"])
 def login():
@@ -39,3 +36,9 @@ def login():
     if(db.execute("SELECT * FROM users WHERE upper(username) =:username AND password = :password", {"username": username, "password":hashedPassword}).rowcount == 1):
         user = db.execute("SELECT username FROM users WHERE upper(username) =:username",{"username":username}).fetchone()
         return render_template("dashboard.html", username=user.username)
+    else:
+        return("Wrong Username or Password")
+@socketio.on("post message")
+def message(data):
+    msg = data["message"]
+    emit("broadcast message", {"message":msg}, broadcast=True)
