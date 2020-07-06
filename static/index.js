@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#signup').onsubmit = () => {
+    document.querySelector('#checkUsername').onclick = () => {
 
         // Init new AJAX request:
         const request = new XMLHttpRequest();
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.querySelector('#alreadyExists').innerHTML = "This username is already taken";
 
                     } else {
-                        document.querySelector('#alreadyExists').innerHTML = "";
+                        document.querySelector('#alreadyExists').innerHTML = "This username is not claimed";
                     }
                 }
                 //Add data to request:
@@ -29,10 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
             request.send(data)
             return false;
         } else {
-            document.querySelector('#alreadyExists').innerHTML = "dude... fill it out first..."
+            alert("No")
             return false;
         }
 
+    };
+    document.querySelector("#signupBtn").onclick = () => {
+        const password = document.querySelector("#passwordsu").value;
+        const passwordConf = document.querySelector("#passwordsuConf").value;
+        if (password !== passwordConf) {
+            document.querySelector("#passwordError").innerHTML = "passwords do not match"
+        } else if (password === passwordConf) {
+            document.querySelector("#signup").submit()
+        }
     };
 });
 
