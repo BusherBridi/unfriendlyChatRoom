@@ -19,20 +19,20 @@
             <button type="submit" id="loginBtn">Log In</button>
         </form>
         <h3>Sign up: </h3>
-        <form action="{{url_for('signup')}}" id="signup" method="post">
-            <label for="username">Username: </label>
-            <input type="text" id="usernamesu" name="username">
+        <form action="{{url_for('signup')}}" method="post" id="signup">
+            <label for="usernamesu">Username: </label>
+            <input type="text" id="usernamesu" name="usernamesu">
             <small id="alreadyExists"></small>
+            <button type="button" id="checkUsername">Check if username is avaliable</button>
 
-            <label for="password" name="password">Password: </label>
-            <input type="password" id="passwordsu" name="password">
+            <label for="passwordsu">Password: </label>
+            <input type="password" id="passwordsu" name="passwordsu">
 
-            <label for="passwordConf" name="passwordConf">Confirm Password: </label>
-            <input type="passwordConf" id="passwordsuConf" name="passwordConf">
+            <label for="passwordsuConf">Confirm Password: </label>
+            <input type="password" id="passwordsuConf" name="passwordsuConf">
+            <small id="passwordError"></small>
 
-            <button type="submit" id="signupBtn"> Sign up</button>
-
-
+            <button type="button" id="signupBtn"> Sign up</button>
         </form>
 
     </body>
