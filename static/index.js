@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         } else {
             document.querySelector('#alreadyExists').innerHTML = "dude... fill it out first..."
+            return false;
         }
 
     };
