@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#checkUsername').onclick = () => {
+        document.querySelector("#alreadyExists").innerHTML = "Checking..."
 
         // Init new AJAX request:
         const request = new XMLHttpRequest();
         const username = document.querySelector('#usernamesu').value;
         if (!(username == "")) {
-            request.open('POST', '/signup');
+            request.open('POST', '/checkUsername');
 
             //After request completion:
             request.onload = () => {
@@ -40,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (password !== passwordConf) {
             document.querySelector("#passwordError").innerHTML = "passwords do not match"
         } else if (password === passwordConf) {
+            document.querySelector("#creatingUser").innerHTML = "Creating User..."
             document.querySelector("#signup").submit()
+
         }
     };
 });
