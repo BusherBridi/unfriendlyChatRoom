@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -38,6 +38,19 @@ def login():
         return render_template("dashboard.html", username=user.username)
     else:
         return("Wrong Username or Password")
+
+@app.route("/signup", methods = ["POST"])
+def signup():
+    username = str(request.form.get("signup"))
+    if(not username):
+        pass
+    else:
+        if(db.execute("SELECT username FROM users WHERE upper(username) =:username", {"username":username.upper()}).rowcount == 1):
+            return jsonify({"isTaken":True})
+        else:
+            return jsonify({"isTaken":False})
+    
+
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
