@@ -1,3 +1,4 @@
+document.cookie = "secure";
 document.addEventListener('DOMContentLoaded', () => {
     // Connect to socket
     console.log("connecting");
