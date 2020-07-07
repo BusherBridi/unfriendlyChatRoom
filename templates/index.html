@@ -11,7 +11,7 @@
         <h3>Log in: </h3>
         <form action="{{url_for('login')}}" method="post">
             <label for="username">Username: </label>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" autocomplete="off">
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password">
@@ -21,7 +21,7 @@
         <h3>Sign up: </h3>
         <form action="{{url_for('signup')}}" method="post" id="signup">
             <label for="usernamesu">Username: </label>
-            <input type="text" id="usernamesu" name="usernamesu">
+            <input type="text" id="usernamesu" name="usernamesu" autocomplete="off">
             <small id="alreadyExists"></small>
             <button type="button" id="checkUsername">Check if username is avaliable</button>
 
