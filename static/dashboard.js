@@ -1,5 +1,3 @@
-document.cookie = "sameSite=lax";
-response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
 document.addEventListener('DOMContentLoaded', () => {
     // Connect to socket
     console.log("connecting");
