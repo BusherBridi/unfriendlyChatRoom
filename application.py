@@ -12,6 +12,7 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
+
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
@@ -70,4 +71,5 @@ def signup():
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
-    emit("broadcast message", {"message":msg}, broadcast=True)
+    user = data["user"]
+    emit("broadcast message", {"message":msg, "user":user}, broadcast=True)
