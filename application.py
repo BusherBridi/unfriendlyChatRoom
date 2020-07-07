@@ -39,7 +39,7 @@ def login():
     else:
         return("Wrong Username or Password")
 
-@app.route("/signup", methods = ["POST"])
+@app.route("/checkUsername", methods = ["POST"])
 def signup():
     username = str(request.form.get("signup"))
     if(not username):
