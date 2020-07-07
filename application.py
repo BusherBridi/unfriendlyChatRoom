@@ -40,7 +40,7 @@ def login():
         return("Wrong Username or Password")
 
 @app.route("/checkUsername", methods = ["POST"])
-def signup():
+def validiation():
     username = str(request.form.get("signup"))
     if(not username):
         pass
@@ -49,6 +49,22 @@ def signup():
             return jsonify({"isTaken":True})
         else:
             return jsonify({"isTaken":False})
+
+@app.route("/signup", methods = ["POST"])
+def signup():
+    username = str(request.form.get("usernamesu"))
+    password = str(request.form.get("passwordsuConf"))
+    passwordConf = str(request.form.get("passwordsuConf"))
+    passwordHash = hashlib.sha256()
+    passwordHash.update(password.encode('utf8'))
+    hashedPassword = str(passwordHash.hexdigest())
+    if(password != passwordConf):
+        return "passwords didnt match"
+    else:
+        db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",{"username":username, "password":hashedPassword})
+        db.commit()
+        return ("User Created")
+    return "error"
     
 
 @socketio.on("post message")
