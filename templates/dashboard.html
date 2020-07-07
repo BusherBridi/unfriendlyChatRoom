@@ -5,10 +5,18 @@
     <title>
         UnFriendly Chat
     </title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 </head>
 
 <body>
-    {{username}}
+    <h3>Hello, <span id="username">{{username}}</span></h3>
+
+    <label for="message">Message: </label>
+    <input type="text" id="message" name="message" autocomplete="off">
+    <button type="button" id="sendMessage">Send</button>
+
+    <ul id="messages"></ul>
 </body>
 
 </html>
