@@ -1,4 +1,5 @@
 document.cookie = "sameSite=lax";
+response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
 document.addEventListener('DOMContentLoaded', () => {
     // Connect to socket
     console.log("connecting");
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
 
                 socket.emit('post message', { 'message': msg, 'user': username });
-
+                console.log("sending message: " + msg)
             }
         };
     });
