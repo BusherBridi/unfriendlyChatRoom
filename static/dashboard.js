@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.cookie = "samesite=secure";
+    document.cookie = "samesite=secure, test=1";
     // Connect to socket
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
