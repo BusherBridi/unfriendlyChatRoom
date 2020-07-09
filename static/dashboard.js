@@ -34,10 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
-    document.querySelector("#mustardPen").onclick = () => {
-        document.querySelector("#mustardPen").innerHTML = "Turn off mustard pen";
+    if (document.querySelector("#mustardPen").checked == true) {
         document.querySelector("body").style.backgroundColor = "yellow";
         document.querySelector("body").style.color = "red";
+
+    }
+    if (document.querySelector("#mustardPen").checked == false) {
+        document.querySelector("body").style.backgroundColor = "white";
+        document.querySelector("body").style.color = "black";
+
     }
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
