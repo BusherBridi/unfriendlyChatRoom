@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
 import hashlib
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -73,3 +73,6 @@ def message(data):
     msg = data["message"]
     user = data["user"]
     emit("broadcast message", {"message":msg, "user":user}, broadcast=True)
+
+if __name__ == "__main__":
+    app.run()
