@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     socket.on('broadcast message', data => {
         const li = document.createElement('li');
-        console.log("getting message: " + msg)
+        console.log(`getting message: ${data.msg}`)
         li.innerHTML = `${data.user}: ${data.message}`;
         document.querySelector("#messages").append(li);
     })
