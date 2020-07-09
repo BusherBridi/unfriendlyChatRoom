@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("body").style.color = "red";
 
     }
-    if (!document.querySelector("#mustardPen").checked) {
+    if (!(document.querySelector("#mustardPen").checked)) {
         document.querySelector("body").style.backgroundColor = "white";
         document.querySelector("body").style.color = "black";
 
