@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
+    document.querySelector("#mustardPen").onClick = () => {
+        document.querySelector("#mustardPen").innerHTML = "Turn off mustard pen";
+        document.querySelector("body").style.backgroundColor = "yellow";
+        document.querySelector("body").style.background = "red";
+    }
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // Get username
