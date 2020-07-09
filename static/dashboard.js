@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
-    document.querySelector("#mustardPen").onClick = () => {
+    document.querySelector("#mustardPen").onclick = () => {
         document.querySelector("#mustardPen").innerHTML = "Turn off mustard pen";
         document.querySelector("body").style.backgroundColor = "yellow";
         document.querySelector("body").style.background = "red";
