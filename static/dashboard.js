@@ -34,15 +34,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
-    if (document.querySelector("#mustardPen").checked) {
-        document.querySelector("body").style.backgroundColor = "yellow";
-        document.querySelector("body").style.color = "red";
-
-    }
-    if (!(document.querySelector("#mustardPen").checked)) {
-        document.querySelector("body").style.backgroundColor = "white";
-        document.querySelector("body").style.color = "black";
-
+    document.querySelector("#mustardPen").onclick = () => {
+        if (document.querySelector("#mustardPen").value == "OFF") {
+            document.querySelector("body").style.color = "red";
+            document.querySelector("body").style.backgroundColor = "yellow";
+            document.querySelector("#mustardPen").value = "ON";
+            document.querySelector("#mustardPenState").innerHTML = "off"
+        } else if (document.querySelector("#mustardPen").value == "ON") {
+            document.querySelector("body").style.color = "black";
+            document.querySelector("body").style.backgroundColor = "white";
+            document.querySelector("#mustardPen").value = "OFF";
+            document.querySelector("#mustardPenState").innerHTML = "on"
+        }
     }
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Cannot send empty message")
         } else {
             socket.emit('post message', { 'message': msg, 'user': username })
-            console.log("sending message: " + msg)
+            console.log("sending message: " + msg);
         };
     }
     socket.on('broadcast message', data => {
