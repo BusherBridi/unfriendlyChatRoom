@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.protocol === "https:") {
+        window.location.protocol = "http:";
+    }
     document.querySelector('#checkUsername').onclick = () => {
         document.querySelector("#alreadyExists").innerHTML = "Checking..."
 
