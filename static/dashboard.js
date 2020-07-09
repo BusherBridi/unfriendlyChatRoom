@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
-    if (document.querySelector("#mustardPen").checked == true) {
+    if (document.querySelector("#mustardPen").checked) {
         document.querySelector("body").style.backgroundColor = "yellow";
         document.querySelector("body").style.color = "red";
 
     }
-    if (document.querySelector("#mustardPen").checked == false) {
+    if (!document.querySelector("#mustardPen").checked) {
         document.querySelector("body").style.backgroundColor = "white";
         document.querySelector("body").style.color = "black";
 
