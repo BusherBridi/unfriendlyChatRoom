@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector("#mustardPen").onclick = () => {
         document.querySelector("#mustardPen").innerHTML = "Turn off mustard pen";
         document.querySelector("body").style.backgroundColor = "yellow";
-        document.querySelector("body").style.background = "red";
+        document.querySelector("body").style.color = "red";
     }
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
