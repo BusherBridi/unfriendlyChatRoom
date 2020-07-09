@@ -31,7 +31,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Connect to socket
-    window.location.protocol = "http";
+    if (window.location.protocol === "https:") {
+        window.location.protocol = "http:";
+    }
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // Get username
