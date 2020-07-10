@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector("#mustardPen").onclick = () => {
 
+        if(document.querySelector("#darkMode").value == "ON") {
+          document.querySelector("#darkMode").click();
+        }
+
         if (document.querySelector("#mustardPen").value == "OFF") {
             document.querySelector("body").style.color = "red";
             document.querySelector("body").style.backgroundColor = "yellow";
@@ -52,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.querySelector("#darkMode").onclick = () => {
-      
+        if(document.querySelector("#mustardPen").value == "ON") {
+          document.querySelector("#mustardPen").click();
+        }
+
+
         if (document.querySelector("#darkMode").value == "OFF") {
             document.querySelector("body").style.color = "white";
             document.querySelector("body").style.backgroundColor = "black";
