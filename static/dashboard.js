@@ -34,12 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === "https:") {
         window.location.protocol = "http:";
     }
+
     document.querySelector("#mustardPen").onclick = () => {
+
         if (document.querySelector("#mustardPen").value == "OFF") {
             document.querySelector("body").style.color = "red";
             document.querySelector("body").style.backgroundColor = "yellow";
             document.querySelector("#mustardPen").value = "ON";
             document.querySelector("#mustardPenState").innerHTML = "off"
+
         } else if (document.querySelector("#mustardPen").value == "ON") {
             document.querySelector("body").style.color = "black";
             document.querySelector("body").style.backgroundColor = "white";
@@ -47,6 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#mustardPenState").innerHTML = "on"
         }
     }
+
+    document.querySelector("#darkMode").onclick = () => {
+      
+        if (document.querySelector("#darkMode").value == "OFF") {
+            document.querySelector("body").style.color = "white";
+            document.querySelector("body").style.backgroundColor = "black";
+            document.querySelector("#darkMode").value = "ON";
+            document.querySelector("#darkModeState").innerHTML = "off"
+
+        } else if (document.querySelector("#darkMode").value == "ON") {
+            document.querySelector("body").style.color = "black";
+            document.querySelector("body").style.backgroundColor = "white";
+            document.querySelector("#darkMode").value = "OFF";
+            document.querySelector("#darkModeState").innerHTML = "on"
+        }
+    }
+
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // Get username
