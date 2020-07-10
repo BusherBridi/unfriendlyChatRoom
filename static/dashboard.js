@@ -36,24 +36,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.querySelector("#themeSelect").onchange = () => {
+      let body = document.querySelector("body");
+
+      body.style.background = "";
+      body.style.animation = "";
+      body.style.backgroundSize = "";
+
+      var params = ["270deg, #e9ec5e, #ff2278", "270deg, #02bee8, #7a33bf", "270deg, #840029, #a91834, #f64d52"];
+      var rand = Math.floor(Math.random() * params.length);
+
       switch(document.querySelector("#themeSelect").value) {
+
         case "basic":
-          document.querySelector("body").style.color = "black";
-          document.querySelector("body").style.backgroundColor = "white";
+          body.style.color = "black";
+          body.style.backgroundColor = "white";
           break;
 
         case "mustard":
-          document.querySelector("body").style.color = "red";
-          document.querySelector("body").style.backgroundColor = "yellow";
+          body.style.color = "red";
+          body.style.backgroundColor = "yellow";
           break;
 
         case "dark":
-          document.querySelector("body").style.color = "white";
-          document.querySelector("body").style.backgroundColor = "black";
+          body.style.color = "white";
+          body.style.backgroundColor = "black";
+          break;
+
+        case "vibe":
+          body.style.color = "white";
+          body.style.background = "linear-gradient(" + params[rand] + ")";
+          body.style.animation = "grad 9s ease infinite";
+          body.style.backgroundSize = "400% 400%";
           break;
       }
     }
-
 
 
     console.log("connecting");
