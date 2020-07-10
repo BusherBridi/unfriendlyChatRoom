@@ -12,11 +12,12 @@
 
 <body>
     <h3>Hello, <span id="username">{{username}}</span></h3>
-    <label for="mustardPen">Turn <span id = "mustardPenState">on</span> Mustard Pen</label>
-    <button id="mustardPen" name="mustardPen" value="OFF">Toggle Mustard Pen</button>
-
-    <label for="darkMode">Turn <span id = "darkModeState">on</span> Dark Mode</label>
-    <button id="darkMode" name="darkMode" value="OFF">Toggle Dark Mode</button>
+    
+    <select name="theme" id="themeSelect">
+      <option value="basic">Basic</option>
+      <option value="mustard">Mustard Pen</option>
+      <option value="dark">Dark Mode</option>
+    </select>
 
     <label for="message">Message: </label>
     <input type="text" id="message" name="message" autocomplete="off">

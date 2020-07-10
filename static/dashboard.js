@@ -35,45 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.protocol = "http:";
     }
 
-    document.querySelector("#mustardPen").onclick = () => {
+    document.querySelector("#themeSelect").onchange = () => {
+      switch(document.querySelector("#themeSelect").value) {
+        case "basic":
+          document.querySelector("body").style.color = "black";
+          document.querySelector("body").style.backgroundColor = "white";
+          break;
 
-        if(document.querySelector("#darkMode").value == "ON") {
-          document.querySelector("#darkMode").click();
-        }
+        case "mustard":
+          document.querySelector("body").style.color = "red";
+          document.querySelector("body").style.backgroundColor = "yellow";
+          break;
 
-        if (document.querySelector("#mustardPen").value == "OFF") {
-            document.querySelector("body").style.color = "red";
-            document.querySelector("body").style.backgroundColor = "yellow";
-            document.querySelector("#mustardPen").value = "ON";
-            document.querySelector("#mustardPenState").innerHTML = "off"
-
-        } else if (document.querySelector("#mustardPen").value == "ON") {
-            document.querySelector("body").style.color = "black";
-            document.querySelector("body").style.backgroundColor = "white";
-            document.querySelector("#mustardPen").value = "OFF";
-            document.querySelector("#mustardPenState").innerHTML = "on"
-        }
+        case "dark":
+          document.querySelector("body").style.color = "white";
+          document.querySelector("body").style.backgroundColor = "black";
+          break;
+      }
     }
 
-    document.querySelector("#darkMode").onclick = () => {
-        if(document.querySelector("#mustardPen").value == "ON") {
-          document.querySelector("#mustardPen").click();
-        }
 
-
-        if (document.querySelector("#darkMode").value == "OFF") {
-            document.querySelector("body").style.color = "white";
-            document.querySelector("body").style.backgroundColor = "black";
-            document.querySelector("#darkMode").value = "ON";
-            document.querySelector("#darkModeState").innerHTML = "off"
-
-        } else if (document.querySelector("#darkMode").value == "ON") {
-            document.querySelector("body").style.color = "black";
-            document.querySelector("body").style.backgroundColor = "white";
-            document.querySelector("#darkMode").value = "OFF";
-            document.querySelector("#darkModeState").innerHTML = "on"
-        }
-    }
 
     console.log("connecting");
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
