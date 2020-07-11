@@ -8,23 +8,34 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- To Remove -->
+    <link rel="stylesheet" href="../static/styles.css">
+    <script src="../static/dashboard.js" charset="utf-8"></script>
 </head>
 
 <body>
     <h3>Hello, <span id="username">{{username}}</span></h3>
 
-    <select name="theme" id="themeSelect">
-      <option value="basic">Basic</option>
-      <option value="mustard">Mustard Pen</option>
-      <option value="dark">Dark Mode</option>
-      <option value="vibe">Vibe</option>
-    </select>
+    <ul id="messages" class="chat"></ul>
 
-    <label for="message">Message: </label>
-    <input type="text" id="message" name="message" autocomplete="off">
-    <button id="sendMessage">Send</button>>
+    <div class="messageBar" id="help">
 
-    <ul id="messages"></ul>
+      <select name="theme" id="themeSelect" class="theme">
+        <option value="basic">Basic</option>
+        <option value="mustard">Mustard Pen</option>
+        <option value="dark">Dark Mode</option>
+        <option value="vibe">Vibe</option>
+      </select>
+
+      <div class="messageField" id="">
+        <label for="message">Message: </label>
+        <input type="text" id="message" name="message" autocomplete="off">
+        <button id="sendMessage">Send</button>
+      </div>
+    </div>
+
+
 </body>
 
 </html>

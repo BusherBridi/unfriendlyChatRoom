@@ -3,6 +3,33 @@ body {
   height: 100%;
 }
 
+.chat {
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 5%;
+}
+
+.messageBar {
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  width: 100%;
+}
+
+.messageField {
+  margin-left: 30%;
+
+}
+
+.theme {
+  float: left;
+}
+
+#message {
+  width: 50%
+}
+
 @-webkit-keyframes grad {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
