@@ -9,9 +9,9 @@
     <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
-    <!-- To Remove -->
-    <link rel="stylesheet" href="../static/styles.css">
-    <script src="../static/dashboard.js" charset="utf-8"></script>
+    <!-- UNCOMMENT FOR DEBUGGING -->
+    <!-- <link rel="stylesheet" href="../static/styles.css">
+    <script src="../static/dashboard.js" charset="utf-8"></script> -->
 </head>
 
 <body>
@@ -21,18 +21,18 @@
 
     <div class="messageBar" id="help">
 
-      <select name="theme" id="themeSelect" class="theme">
+        <select name="theme" id="themeSelect" class="theme">
         <option value="basic">Basic</option>
         <option value="mustard">Mustard Pen</option>
         <option value="dark">Dark Mode</option>
         <option value="vibe">Vibe</option>
       </select>
 
-      <div class="messageField" id="">
-        <label for="message">Message: </label>
-        <input type="text" id="message" name="message" autocomplete="off">
-        <button id="sendMessage">Send</button>
-      </div>
+        <div class="messageField" id="">
+            <label for="message">Message: </label>
+            <input type="text" id="message" name="message" autocomplete="off">
+            <button id="sendMessage">Send</button>
+        </div>
     </div>
 
 
