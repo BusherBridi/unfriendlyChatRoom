@@ -55,8 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             socket.emit('post message', { 'message': msg, 'user': username })
             console.log("sending message: " + msg);
+            document.querySelector("#message").value = "";
+
         };
     }
+    document.querySelector("#message").addEventListener("keyup", event => {
+        if (event.key !== "Enter") return;
+        document.querySelector("#sendMessage").click();
+        event.preventDefault();
+    });
     socket.on('broadcast message', data => {
         const li = document.createElement('li');
         console.log(`getting message: ${data.msg}`)
