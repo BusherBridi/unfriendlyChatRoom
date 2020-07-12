@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector("#themeSelect").onchange = () => {
         let body = document.querySelector("body");
+        let bar = document.querySelector(".messageBar");
 
         //Resetting the body styles
-        body.style.background = "";
-        body.style.animation = "";
-        body.style.backgroundSize = "";
+        body.style = "";
+        bar.style = "";
+
 
         //Set style based on selected theme
         switch (document.querySelector("#themeSelect").value) {
@@ -18,18 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
             case "basic":
                 body.style.color = "black";
                 body.style.backgroundColor = "white";
-                document.querySelector(".messageBar").backgroundColor = "white";
+                bar.style.backgroundColor = "rgb(160, 160, 160)";
                 break;
 
             case "mustard":
                 body.style.color = "red";
                 body.style.backgroundColor = "yellow";
-                document.querySelector(".messageBar").backgroundColor = "white";
+
+                bar.style.color = "yellow";
+                bar.style.backgroundColor = "red";
                 break;
 
             case "dark":
                 body.style.color = "white";
                 body.style.backgroundColor = "black";
+                bar.style.backgroundColor = "rgba(0, 0, 0, 0)"
                 break;
 
             case "vibe":
@@ -40,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body.style.background = "linear-gradient(" + params[rand] + ")";
                 body.style.animation = "grad 9s ease infinite";
                 body.style.backgroundSize = "400% 400%";
+                bar.style.backgroundColor = "rgba(160, 160, 160, .5)"
                 break;
         }
     }
