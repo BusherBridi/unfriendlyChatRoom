@@ -3,12 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.protocol = "http:";
     }
     document.querySelector('#checkUsername').onclick = () => {
-        document.querySelector("#alreadyExists").innerHTML = "Checking..."
+        const username = document.querySelector('#usernamesu').value;
+        if (username == "") {
+            //HANDLE NO ENTRY HERE:
+            document.querySelector("#noEntry").innerHTML = "Please enter a username donkey"
+            document.querySelector('#usernamesu').className = "form-control";
+        }
+
 
         // Init new AJAX request:
         const request = new XMLHttpRequest();
-        const username = document.querySelector('#usernamesu').value;
+
         if (!(username == "")) {
+            document.querySelector("#noEntry").innerHTML = ""
+                //LOADING BAR HERE
+            document.querySelector('#checkusername').style = "display:none;";
+            document.querySelector('#loadingBtn').style = "display:block;";
+
             request.open('POST', '/checkUsername');
 
             //After request completion:
@@ -19,10 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     //update <small>:
                     if (data.isTaken) {
-                        document.querySelector('#alreadyExists').innerHTML = "This username is already taken";
+
+                        document.querySelector('#usernamesu').className = "form-control is-invalid";
+                        document.querySelector('#checkusername').style = "display:block;";
+                        document.querySelector('#loadingBtn').style = "display:none;";
+
 
                     } else {
-                        document.querySelector('#alreadyExists').innerHTML = "This username is not claimed";
+
+                        document.querySelector('#usernamesu').className = "form-control is-valid";
+                        document.querySelector('#checkusername').style = "display:block;";
+                        document.querySelector('#loadingBtn').style = "display:none;";
                     }
                 }
                 //Add data to request:
@@ -33,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
             request.send(data)
             return false;
         } else {
-            document.querySelector("#alreadyExists").innerHTML = "Please enter a username donkey"
+            //HANDLE NO ENTRY HERE:
+            document.querySelector("#noEntry").innerHTML = "Please enter a username donkey"
             return false;
         }
 
@@ -44,15 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const passwordConf = document.querySelector("#passwordsuConf").value;
         const username = document.querySelector("#usernamesu").value;
         if (username == "") {
-            alert("Please enter a username!")
+            // alert("Please enter a username!")
+            document.querySelector("#noEntry").innerHTML = "Please enter a username donkey"
+
         }
         if (password == "") {
-            alert("Please enter a password!")
+            // alert("Please enter a password!")
+            document.querySelector('#passwordsu').className = "form-control is-invalid";
         } else {
             if (password !== passwordConf) {
-                document.querySelector("#passwordError").innerHTML = "passwords do not match"
+                document.querySelector('#passwordsuConf').className = "form-control is-invalid";
             } else if (password === passwordConf) {
-                document.querySelector("#creatingUser").innerHTML = "Creating User..."
+                document.querySelector('#creatingUser').style = "display:block;";
                 document.querySelector("#signup").submit()
 
             }
