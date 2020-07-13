@@ -19,12 +19,12 @@ db = scoped_session(sessionmaker(bind=engine))
 
 # Set up socket
 socketio = SocketIO(app)
+connectedUsers = []
 
 
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 
 @app.route("/login", methods = ["POST"])
@@ -39,7 +39,7 @@ def login():
         return render_template("chat.html", username=user.username)
     else:
         return("Wrong Username or Password")
-        
+
 @app.route("/signup")
 def signup():
     return render_template("signup.html")
@@ -72,13 +72,40 @@ def createUser():
         db.commit()
         return ("User Created")
     return "error"
-    
+
+
 
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
     user = data["user"]
     emit("broadcast message", {"message":msg, "user":user}, broadcast=True)
+
+""" this should be a comment omega
+@socketio.on("user connected")
+def emitNewOnlineUser(data):
+    uname = data["uname"]
+    emit("add new online", {"user":uname}, broadcast=True)
+    emit("get usernames", {"newUserId" : },broadcast=False)
+
+@socketio.on("emit username")
+def getOnlineList(data):
+
+"""
+
+@socketio.on("update online list")
+def updateOnline():
+    emit("send username", broadcast=True)
+
+@socketio.on("pass username")
+def updateUsers(data):
+    emit("add new online", {"uname" : data["uname"]}, broadcast=True)
+
+@socketio.on_error()
+def error_handler(e):
+    emit("send username", broadcast=True)
+
+
 
 if __name__ == "__main__":
     app.run()

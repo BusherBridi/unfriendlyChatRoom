@@ -1,6 +1,7 @@
 body {
   background-image: url('king.png');
   height: 100%;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .chat {
