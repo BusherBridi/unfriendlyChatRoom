@@ -54,13 +54,15 @@ def validiation():
 @app.route("/signup", methods = ["POST"])
 def signup():
     username = str(request.form.get("usernamesu"))
-    password = str(request.form.get("passwordsuConf"))
+    password = str(request.form.get("passwordsu"))
     passwordConf = str(request.form.get("passwordsuConf"))
     passwordHash = hashlib.sha256()
     passwordHash.update(password.encode('utf8'))
     hashedPassword = str(passwordHash.hexdigest())
-    if(password != passwordConf):
-        return "passwords didnt match"
+    if(len(username) <= 0 or len(password) <= 0):
+        return ("you must fill in all the fields")
+    elif(password != passwordConf):
+        return ("passwords didn't match")
     else:
         db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",{"username":username, "password":hashedPassword})
         db.commit()
