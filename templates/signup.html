@@ -1,0 +1,34 @@
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='signup.js') }}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename = 'signup.css')}}">
+{% extends "layout.html" %}
+{% block heading%}
+Sign Up
+{% endblock %}
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>
+        Sign Up
+    </title>
+    <script></script>
+
+
+{% block body%}
+    <form action="{{url_for('createUser')}}" method="post" id="signup">
+        <label for="usernamesu">Username: </label>
+        <input type="text" id="usernamesu" name="usernamesu" autocomplete="off">
+        <small id="alreadyExists"></small>
+        <button type="button" id="checkUsername">Check if username is avaliable</button>
+
+        <label for="passwordsu">Password: </label>
+        <input type="password" id="passwordsu" name="passwordsu">
+
+        <label for="passwordsuConf">Confirm Password: </label>
+        <input type="password" id="passwordsuConf" name="passwordsuConf">
+        <small id="passwordError"></small>
+
+        <button type="button" id="signupBtn"> Sign up</button>
+    </form>
+    <h3 id="creatingUser"></h3>
+{% endblock %}

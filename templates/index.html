@@ -1,45 +1,39 @@
-<!DOCTYPE html>
+<link rel="stylesheet" href="{{url_for('static', filename = 'index.css')}}">
+{% extends "layout.html" %}
 
-<head>
-    <link rel="stylesheet" href="{{url_for('static', filename = 'index.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>
-        Unfriendly Chat
-    </title>
+{% block heading%}
+Unfriendly Chat
+{% endblock %}
 
-    <body>
-        <h1 id="title">Unfriendly Chat</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md">
-                    <!-- LOG IN FORM -->
-                    <h3>Log in: </h3>
-                    <form action="{{url_for('login')}}" method="post">
-                        <div class="form-group">
-                            <label for="username">Username: </label>
-                            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Username" autocomplete="off">
+{% block body%}
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <!-- LOG IN FORM -->
+            <h3>Log in: </h3>
+            <form action="{{url_for('login')}}" method="post">
+                <div class="form-group">
+                    <label for="username">Username: </label>
+                    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Username" autocomplete="off">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
-                    </form>
-                    <!-- END LOG IN FORM -->
                 </div>
-                <!-- SIGN UP BUTTON -->
-                <div class="col-md" id="signUpForm">
-                    <h3>Don't Have an account donkey? Sign up!</h3>
-                    <form action="{{url_for('signup')}}">
-                        <button type="submit" class="btn btn-outline-success btn-lg" id="signUpBtn">Sign Up</button>
-                    </form>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
-                <!-- END SIGN UP BUTTON -->
-            </div>
+
+                <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
+            </form>
+            <!-- END LOG IN FORM -->
         </div>
-        <!-- FOOTER PIC -->
-        <img src="{{url_for('static',filename='frown.svg')}}" id="footerPic" alt="frown">
-    </body>
-</head>
+        <!-- SIGN UP BUTTON -->
+        <div class="col-md" id="signUpForm">
+            <h3>Don't Have an account donkey? Sign up!</h3>
+            <form action="{{url_for('signup')}}">
+                <button type="submit" class="btn btn-outline-success btn-lg" id="signUpBtn">Sign Up</button>
+            </form>
+        </div>
+        <!-- END SIGN UP BUTTON -->
+    </div>
+</div>
+{% endblock %}
