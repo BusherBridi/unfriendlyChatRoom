@@ -39,20 +39,24 @@ def login():
         return render_template("chat.html", username=user.username)
     else:
         return("Wrong Username or Password")
+        
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
 
 @app.route("/checkUsername", methods = ["POST"])
 def validiation():
-    username = str(request.form.get("signup"))
+    username = str(request.form.get("username"))
     if(not username):
         pass
     else:
         if(db.execute("SELECT username FROM users WHERE upper(username) =:username", {"username":username.upper()}).rowcount == 1):
-            return jsonify({"isTaken":True})
+            return jsonify({"isTaken":True, "username":username})
         else:
-            return jsonify({"isTaken":False})
+            return jsonify({"isTaken":False, "username":username})
 
-@app.route("/signup", methods = ["POST"])
-def signup():
+@app.route("/createUser", methods = ["POST"])
+def createUser():
     username = str(request.form.get("usernamesu"))
     password = str(request.form.get("passwordsu"))
     passwordConf = str(request.form.get("passwordsuConf"))

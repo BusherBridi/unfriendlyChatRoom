@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 //Add data to request:
             const data = new FormData();
-            data.append('createUser', username);
+            data.append('username', username);
 
             //send req
             request.send(data)
