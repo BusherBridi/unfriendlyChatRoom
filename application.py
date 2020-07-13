@@ -36,7 +36,7 @@ def login():
     hashedPassword = str(passwordHash.hexdigest())
     if(db.execute("SELECT * FROM users WHERE upper(username) =:username AND password = :password", {"username": username, "password":hashedPassword}).rowcount == 1):
         user = db.execute("SELECT username FROM users WHERE upper(username) =:username",{"username":username}).fetchone()
-        return render_template("dashboard.html", username=user.username)
+        return render_template("chat.html", username=user.username)
     else:
         return("Wrong Username or Password")
 

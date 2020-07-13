@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 
 <head>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'index.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>
-        Log-In
+        Unfriendly Chat
     </title>
 
     <body>
-        <h3>Log in: </h3>
-        <form action="{{url_for('login')}}" method="post">
-            <label for="username">Username: </label>
-            <input type="text" id="username" name="username" autocomplete="off">
+        <h1 id="title">Unfriendly Chat</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <!-- LOG IN FORM -->
+                    <h3>Log in: </h3>
+                    <form action="{{url_for('login')}}" method="post">
+                        <div class="form-group">
+                            <label for="username">Username: </label>
+                            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Username" autocomplete="off">
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        </div>
 
-            <button type="submit" id="loginBtn">Log In</button>
-        </form>
-        <h3>Sign up: </h3>
-        <form action="{{url_for('signup')}}" method="post" id="signup">
-            <label for="usernamesu">Username: </label>
-            <input type="text" id="usernamesu" name="usernamesu" autocomplete="off">
-            <small id="alreadyExists"></small>
-            <button type="button" id="checkUsername">Check if username is avaliable</button>
-
-            <label for="passwordsu">Password: </label>
-            <input type="password" id="passwordsu" name="passwordsu">
-
-            <label for="passwordsuConf">Confirm Password: </label>
-            <input type="password" id="passwordsuConf" name="passwordsuConf">
-            <small id="passwordError"></small>
-
-            <button type="button" id="signupBtn"> Sign up</button>
-        </form>
-        <h3 id="creatingUser"></h3>
-
+                        <button type="submit" class="btn btn-primary" id="loginBtn">Log In</button>
+                    </form>
+                    <!-- END LOG IN FORM -->
+                </div>
+                <!-- SIGN UP BUTTON -->
+                <div class="col-md" id="signUpForm">
+                    <h3>Don't Have an account donkey? Sign up!</h3>
+                    <form action="{{url_for('signup')}}">
+                        <button type="submit" class="btn btn-outline-success btn-lg" id="signUpBtn">Sign Up</button>
+                    </form>
+                </div>
+                <!-- END SIGN UP BUTTON -->
+            </div>
+        </div>
+        <!-- FOOTER PIC -->
+        <img src="{{url_for('static',filename='frown.svg')}}" id="footerPic" alt="frown">
     </body>
 </head>

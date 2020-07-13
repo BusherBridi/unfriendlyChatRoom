@@ -6,12 +6,13 @@
         UnFriendly Chat
     </title>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 
     <!-- UNCOMMENT FOR DEBUGGING -->
     <!-- <link rel="stylesheet" href="../static/styles.css">
-    <script src="../static/dashboard.js" charset="utf-8"></script> -->
+    <script src="../static/chat.js" charset="utf-8"></script> -->
 </head>
 
 <body>
@@ -19,9 +20,9 @@
 
     <ul id="messages" class="chat"></ul>
 
-    <div class="messageBar" id="help">
+    <div class="messageBar">
 
-        <select name="theme" id="themeSelect" class="theme">
+      <select name="theme" id="themeSelect" class="theme">
         <option value="basic">Basic</option>
         <option value="mustard">Mustard Pen</option>
         <option value="dark">Dark Mode</option>
