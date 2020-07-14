@@ -1,14 +1,6 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='signup.js') }}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename = 'signup.css')}}"> {% extends "layout.html" %} {% block heading%} Sign Up {% endblock %}
-
-<title>
-    Sign Up
-</title>
-<script></script>
-
-
-{% block body%}
+<link rel="stylesheet" href="{{url_for('static', filename = 'signup.css')}}"> {% extends "layout.html" %} {% block heading%} Sign Up {% endblock %} {% block body%}
 <div class="container">
     <div class="row">
         <!-- BEGIN SIGN UP FORM -->
