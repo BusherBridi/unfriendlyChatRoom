@@ -14,32 +14,38 @@
         <!-- BEGIN SIGN UP FORM -->
         <form action="{{url_for('createUser')}}" method="post" id="signup">
             <div class="form-group">
-                <label for="usernamesu">Username: </label>
-                <input type="text" id="usernamesu" name="usernamesu" autocomplete="off" class="form-control" required>
-                <small id="noEntry"></small>
-                <div class="valid-feedback">
-                    Username is avaliable
-                </div>
-                <div class="invalid-feedback">
-                    Username is already taken
-                </div>
-                <button type="button" id="checkUsername" class="btn btn-primary ">Check if username is avaliable</button>
-                <div class="text-center" id="loadingAnimation">
-                    <button class="btn btn-primary" type="button" disabled id="loadingBtn">
+                <div>
+                    <label for="usernamesu">Username: </label>
+                    <input type="text" id="usernamesu" name="usernamesu" autocomplete="off" class="form-control" required>
+                    <small id="noEntry"></small>
+                    <div class="valid-feedback">
+                        Username is avaliable
+                    </div>
+                    <div class="invalid-feedback">
+                        Username is already taken
+                    </div>
+                    <button type="button" id="checkUsername" class="btn btn-primary ">Check if username is avaliable</button>
+                    <div class="text-center" id="loadingAnimation">
+                        <button class="btn btn-primary" type="button" disabled id="loadingBtn">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Checking...
                   </button>
+                    </div>
                 </div>
                 <br></br>
-                <label for="passwordsu">Password: </label>
-                <input type="password" id="passwordsu" name="passwordsu" class="form-control" required>
-                <div class="invalid-feedback">
-                    Do you think this is a good password?
+                <div>
+                    <label for="passwordsu">Password: </label>
+                    <input type="password" id="passwordsu" name="passwordsu" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Do you think this is a good password?
+                    </div>
                 </div>
-                <label for="passwordsuConf">Confirm Password: </label>
-                <input type="password" id="passwordsuConf" name="passwordsuConf" class="form-control" required>
-                <div class="invalid-feedback">
-                    Passwords don't match
+                <div>
+                    <label for="passwordsuConf">Confirm Password: </label>
+                    <input type="password" id="passwordsuConf" name="passwordsuConf" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Passwords don't match
+                    </div>
                 </div>
 
 
