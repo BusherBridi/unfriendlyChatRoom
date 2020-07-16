@@ -101,11 +101,5 @@ def updateOnline():
 def updateUsers(data):
     emit("add new online", {"uname" : data["uname"]}, broadcast=True)
 
-@socketio.on_error()
-def error_handler(e):
-    emit("send username", broadcast=True)
-
-
-
 if __name__ == "__main__":
     app.run()

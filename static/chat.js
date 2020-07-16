@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Update Online List for everyone
     socket.emit('update online list');
-    document.querySelector("#onlineUsers").innerHTML = "";
+
 
     //Broadcast msg:
     document.querySelector('#sendMessage').onclick = () => {
@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('post message', { 'message': msg, 'user': username })
             console.log("sending message: " + msg);
             document.querySelector("#message").value = "";
+            socket.emit('update online list');
         };
     }
 
@@ -92,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const item = document.createElement('li');
         item.innerHTML = `${data.uname}`;
         document.querySelector("#onlineUsers").append(item);
-
     });
+
 
     socket.on('send username', () => {
         //let username = document.querySelector("#username").innerHTML
