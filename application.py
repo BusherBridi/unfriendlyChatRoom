@@ -20,12 +20,16 @@ db = scoped_session(sessionmaker(bind=engine))
 # Set up socket
 socketio = SocketIO(app)
 
+#Set up emoji list using the file names of the images found in /assets
+emojis = []
+for filename in os.listdir('static/assets'):
+    if(filename.endswith('.png')):
+        emojis.append(filename[:-4])
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
-
-
 
 @app.route("/login", methods = ["POST"])
 def login():
@@ -39,7 +43,7 @@ def login():
         return render_template("chat.html", username=user.username)
     else:
         return("Wrong Username or Password")
-        
+
 @app.route("/signup")
 def signup():
     return render_template("signup.html")
@@ -72,12 +76,23 @@ def createUser():
         db.commit()
         return ("User Created")
     return "error"
-    
+
+@app.route("/getEmojis", methods = ['GET'])
+def getEmojis():
+    return jsonify(emojis);
 
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
     user = data["user"]
+
+    if(msg == "!emojis"):
+        user = "Server"
+        msg = "<br>"
+        for emo in emojis:
+            msg += "-" + emo + "<br>"
+
+
     emit("broadcast message", {"message":msg, "user":user}, broadcast=True)
 
 if __name__ == "__main__":

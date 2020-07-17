@@ -54,8 +54,18 @@ document.addEventListener('DOMContentLoaded', () => {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // Get username
     const username = document.querySelector("#username").innerHTML;
+    var emojis = [];
 
-    //Broadcast msg:
+    fetch('/getEmojis')
+      .then(function (response) {
+        return response.json();
+      }).then( function(myJson) {
+
+        for(var i in myJson) {
+          emojis.push(myJson[i])
+        }
+      })
+
 
     document.querySelector('#sendMessage').onclick = () => {
         const msg = document.querySelector("#message").value;
@@ -67,16 +77,28 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#message").value = "";
         };
     }
+
     document.querySelector("#message").addEventListener("keyup", event => {
         if (event.key !== "Enter") return;
         document.querySelector("#sendMessage").click();
         event.preventDefault();
     });
+
     socket.on('broadcast message', data => {
         const li = document.createElement('li');
-        console.log(`getting message: ${data.msg}`)
-        li.innerHTML = `${data.user}: ${data.message}`;
+        var msg = `${data.message}`;
+
+        //Scan & subsitute in the emojis
+        for(var emo in emojis) {
+          //Since the msg var is eventually put into the li.innerHTML, I'm able to insert an image but inserting the img html tag straight into the message
+          //is it the right way to do it? probably not.
+          msg = msg.replace(new RegExp(":"+emojis[emo]+":", "g"), "<img src=\"/static/assets/"+emojis[emo]+".png\" style=\"width:30px\">");
+        }
+
+
+        li.innerHTML = `${data.user}: ` + msg;
         document.querySelector("#messages").append(li);
         document.querySelector("#messages *:last-child").scrollIntoView();
     })
+
 });

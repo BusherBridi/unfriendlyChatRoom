@@ -1,5 +1,5 @@
 body {
-  background-image: url('king.png');
+  background-image: url('assets/king.png');
   height: 100%;
 }
 
@@ -30,7 +30,11 @@ body {
 }
 
 #message {
-  width: 50%
+  width: 50%;
+}
+
+.emoji {
+
 }
 
 @-webkit-keyframes grad {
