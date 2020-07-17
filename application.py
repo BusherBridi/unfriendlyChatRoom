@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -20,13 +20,16 @@ db = scoped_session(sessionmaker(bind=engine))
 # Set up socket
 socketio = SocketIO(app)
 
-
+# Homepage/index route
 @app.route("/")
 def index():
-    return render_template("index.html")
-
-
-
+    if(not session):
+        return render_template("index.html")
+    elif(session["logged_in"] == True):
+        return redirect(url_for('chatroom'))
+    else:
+        return render_template("index.html")
+# login route
 @app.route("/login", methods = ["POST"])
 def login():
     username = str(request.form.get("username").upper())
@@ -36,14 +39,31 @@ def login():
     hashedPassword = str(passwordHash.hexdigest())
     if(db.execute("SELECT * FROM users WHERE upper(username) =:username AND password = :password", {"username": username, "password":hashedPassword}).rowcount == 1):
         user = db.execute("SELECT username FROM users WHERE upper(username) =:username",{"username":username}).fetchone()
-        return render_template("chat.html", username=user.username)
+        session["logged_in"] = True
+        session["user_info"] = {"username":user.username}
+        return redirect(url_for('chatroom'))
     else:
         return("Wrong Username or Password")
-        
+# Chat room route
+@app.route("/chatroom")
+def chatroom():
+    if(not session):
+        return redirect(url_for('index'))
+    elif(session["logged_in"] == True):
+        return render_template("chat.html", username=session["user_info"]["username"])
+    else:
+        return redirect(url_for('index'))
+# Sign up route
 @app.route("/signup")
 def signup():
-    return render_template("signup.html")
-
+    if(not session):
+        return render_template("signup.html")
+    elif(session["logged_in"] == True):
+        return "cannont create account while logged in"
+    else:
+        return render_template("signup.html")
+    
+# username check API
 @app.route("/checkUsername", methods = ["POST"])
 def validiation():
     username = str(request.form.get("username"))
@@ -55,6 +75,16 @@ def validiation():
         else:
             return jsonify({"isTaken":False, "username":username})
 
+# Dashboard Route 
+@app.route("/dashboard")
+def dashboard():
+    if(not session):
+        return redirect(url_for('index')) #General error page instead of redirecting back to index?
+    elif(session["logged_in"] == True):
+        return render_template("dashboard.html", username=session["user_info"]["username"])
+    else:
+        return redirect(url_for('index'))
+#Create user API
 @app.route("/createUser", methods = ["POST"])
 def createUser():
     username = str(request.form.get("usernamesu"))
@@ -72,8 +102,17 @@ def createUser():
         db.commit()
         return ("User Created")
     return "error"
-    
 
+# Save dashboard changes API
+@app.route("/savechanges", methods = ["POST"])
+def savechanges():
+    bio = str(request.form.get("bio"))
+    announcement = str(request.form.get("announ"))
+    url = str(request.form.get("url"))
+    location = str(request.form.get("location"))
+    
+    
+#For use in chatroom
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
