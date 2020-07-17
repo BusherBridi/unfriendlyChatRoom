@@ -121,8 +121,6 @@ def validiation():
             return jsonify({"isTaken": False, "username": username})
 
 # Save dashboard changes API
-
-
 @app.route("/savechanges", methods=["POST"])
 def savechanges():
     username = session["user_info"]["username"]
@@ -138,7 +136,17 @@ def savechanges():
         data = jsonify({"saved":False})
     return data
 
-    
+# Get Changes API
+@app.route("/getchanges", methods = ["POST"])
+def getchanges():
+    username = session["user_info"]["username"]
+    try:
+        userDashboard= db.execute("SELECT bio, announcement, url, location FROM users WHERE username = :username",{"username":username}).fetchone()
+        data = jsonify({"success":True,"bio":userDashboard.bio,"announcement":userDashboard.announcement,"url":userDashboard.url,"location":userDashboard.location})
+    except:
+        data = jsonify({"success":False})
+    return data
+
 # For use in chatroom
 @socketio.on("post message")
 def message(data):
