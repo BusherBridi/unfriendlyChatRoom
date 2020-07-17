@@ -59,4 +59,9 @@
   margin-left: 120px;
 }
 
+#error {
+  width: 200px;
+  visibility: hidden;
+}
+
 /*# sourceMappingURL=dashboard.css.map */

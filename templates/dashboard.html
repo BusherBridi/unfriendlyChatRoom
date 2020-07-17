@@ -1,5 +1,7 @@
 <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename = 'dashboard.css')}}"> {% extends "layout.html" %} {% block heading%} {{username}}'s Dashboard {% endblock %} {% block body%}
+<link rel="stylesheet" href="{{url_for('static', filename = 'dashboard.css')}}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> {% extends "layout.html" %} {% block heading%} {{username}}'s Dashboard {% endblock %} {% block body%}
+
 <div class="container">
     <div class="row">
         <!-- BEGIN PROFILE PIC  -->
@@ -12,6 +14,7 @@
         </div>
         <!-- END PROFILE PIC -->
         <div class="col-sm">
+
             <div id="personalInfo">
                 <!-- BEGIN BIO -->
                 <div id="bio" class="inputField">
@@ -56,11 +59,13 @@
                         <small class="text-muted" id="locationHelp">SWAT team inbound</small>
                     </div>
                 </div>
+
                 <!-- END Location -->
                 <!-- BEGIN SAVE BUTTON -->
                 <div id="submitDiv">
                     <button type="button" class="btn btn-outline-primary" id="saveBtn">Save Changes</button>
                 </div>
+
                 <!-- END SAVE BUTTON -->
             </div>
         </div>
