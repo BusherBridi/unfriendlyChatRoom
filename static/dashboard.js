@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = JSON.parse(request.responseText);
             console.log(data);
             getChanges();
+            document.querySelector("#uploadSection").style.visibility = "hidden";
         };
         //Add data to request:
         const data = new FormData();
