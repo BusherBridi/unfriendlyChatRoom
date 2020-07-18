@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Trigger file upload when profilepic is clicked
     document.querySelector("#profilePicSection").onclick = () => {
-        document.querySelector("#profilePicUpload").click();
+        document.querySelector("#uploadSection").style.visibility = "visible";
     };
     toggleHelp("announcement", "annouHelp");
     toggleHelp("bioText", "bioHelp");
@@ -9,7 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleHelp("locationText", "locationHelp");
 
     getChanges();
-
+    //'upload' PROFILE PIC:
+    document.querySelector("#changePicBtn").onclick = () => {
+        // Init new AJAX request:
+        const profilePicUrl = document.querySelector("#picurl").value;
+        const request = new XMLHttpRequest();
+        request.open('POST', '/changePic');
+        request.onload = () => {
+            const data = JSON.parse(request.responseText);
+            console.log(data);
+            getChanges();
+        };
+        //Add data to request:
+        const data = new FormData();
+        data.append("profilePicUrl", profilePicUrl);
+        request.send(data);
+        return false;
+    };
     //SAVE CHANGES:
     //Trigger when user clicks save: 
     document.querySelector("#saveBtn").onclick = () => {
@@ -79,6 +95,7 @@ function getChanges() {
             document.querySelector("#announcement").value = data.announcement;
             document.querySelector("#urlText").value = data.url;
             document.querySelector("#locationText").value = data.location;
+            document.querySelector("#profilePic").src = data.profilePicUrl;
         } else {
             setTimeout(() => {
                 divSucc.remove();

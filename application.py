@@ -120,6 +120,17 @@ def validiation():
         else:
             return jsonify({"isTaken": False, "username": username})
 
+# Get Changes API
+@app.route("/getchanges", methods = ["POST"])
+def getchanges():
+    username = session["user_info"]["username"]
+    try:
+        userDashboard= db.execute("SELECT bio, announcement, url, location, profilepicurl FROM users WHERE username = :username",{"username":username}).fetchone()
+        data = jsonify({"success":True,"bio":userDashboard.bio,"announcement":userDashboard.announcement,"url":userDashboard.url,"location":userDashboard.location, "profilePicUrl":userDashboard.profilepicurl})
+    except:
+        data = jsonify({"success":False})
+    return data
+
 # Save dashboard changes API
 @app.route("/savechanges", methods=["POST"])
 def savechanges():
@@ -135,16 +146,18 @@ def savechanges():
     except:
         data = jsonify({"saved":False})
     return data
-
-# Get Changes API
-@app.route("/getchanges", methods = ["POST"])
-def getchanges():
+    
+# Save profilePicUrl to db API
+@app.route("/changePic", methods = ["POST"])
+def changePic():
     username = session["user_info"]["username"]
+    profilePicUrl = str(request.form.get("profilePicUrl"))
     try:
-        userDashboard= db.execute("SELECT bio, announcement, url, location FROM users WHERE username = :username",{"username":username}).fetchone()
-        data = jsonify({"success":True,"bio":userDashboard.bio,"announcement":userDashboard.announcement,"url":userDashboard.url,"location":userDashboard.location})
+        db.execute("UPDATE users SET profilepicurl =:profilepicurl WHERE username = :username",{"profilepicurl":profilePicUrl, "username":username})
+        db.commit()
+        data = jsonify({"saved":True})
     except:
-        data = jsonify({"success":False})
+        data = jsonify({"saved":False})
     return data
 
 # For use in chatroom
