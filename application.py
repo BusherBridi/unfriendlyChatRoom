@@ -21,8 +21,6 @@ db = scoped_session(sessionmaker(bind=engine))
 socketio = SocketIO(app)
 
 # Homepage/index route
-
-
 @app.route("/")
 def index():
     if(not session):
@@ -31,9 +29,8 @@ def index():
         return redirect(url_for('chatroom'))
     else:
         return render_template("index.html")
+
 # login route
-
-
 @app.route("/login", methods=["POST"])
 def login():
     username = str(request.form.get("username").upper())
@@ -49,9 +46,8 @@ def login():
         return redirect(url_for('chatroom'))
     else:
         return("Wrong Username or Password")
+
 # Chat room route
-
-
 @app.route("/chatroom")
 def chatroom():
     if(not session):
@@ -60,9 +56,8 @@ def chatroom():
         return render_template("chat.html", username=session["user_info"]["username"])
     else:
         return redirect(url_for('index'))
+
 # Sign up route
-
-
 @app.route("/signup")
 def signup():
     if(not session):
@@ -73,8 +68,6 @@ def signup():
         return render_template("signup.html")
 
 # Dashboard Route
-
-
 @app.route("/dashboard")
 def dashboard():
     if(not session):
@@ -84,9 +77,12 @@ def dashboard():
         return render_template("dashboard.html", username=session["user_info"]["username"])
     else:
         return redirect(url_for('index'))
+#logout API
+@app.route("/logout")
+def logout():
+    session["logged_in"] = False
+    return ("logged out")
 # Create user API
-
-
 @app.route("/createUser", methods=["POST"])
 def createUser():
     username = str(request.form.get("usernamesu"))
@@ -107,8 +103,6 @@ def createUser():
     return "error"
 
 # username check API
-
-
 @app.route("/checkUsername", methods=["POST"])
 def validiation():
     username = str(request.form.get("username"))
