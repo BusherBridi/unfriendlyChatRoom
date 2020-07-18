@@ -64,4 +64,8 @@
   visibility: hidden;
 }
 
+#title {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
 /*# sourceMappingURL=dashboard.css.map */
