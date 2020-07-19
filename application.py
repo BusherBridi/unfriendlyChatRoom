@@ -1,5 +1,5 @@
 import os
-
+import re
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 from sqlalchemy import create_engine, exc
@@ -95,6 +95,8 @@ def createUser():
         return ("you must fill in all the fields")
     elif(password != passwordConf):
         return ("passwords didn't match")
+    elif(not re.match("(?=^[A-Za-z])(?=^.{8,330}$)(?=.*[!@#$%^&*]+)(?=^\S+$)(?=.*\d{1,})(?=.*[a-z]{1,})(?=.*[A-Z]{1,}).*$",password)):
+        return ("passwords does not meet the criteria")
     else:
         db.execute("INSERT INTO users (username, password) VALUES (:username, :password)", {
                    "username": username, "password": hashedPassword})
