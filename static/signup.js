@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //END DISABLE SIGN UP BUTTON
 
     //BEGIN USERNAME VALIDATION
-    document.querySelector("#usernamesu").oninput = () => {
+    document.querySelector("#usernamesu").onblur = () => {
+        document.querySelector('#usernamereq').style.visibility = 'hidden';
         const username = document.querySelector('#usernamesu').value;
         const usernameReq = /(?=^[A-Za-z])(?=^.{6,64}$).*$/;
         if (username == "") {
@@ -100,16 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#usernamereq').style.visibility = 'visible';
             document.querySelector("#noEntry").innerHTML = ""
         };
-        document.querySelector('#usernamesu').onblur = () => {
-            document.querySelector('#usernamereq').style.visibility = 'hidden';
-            username = document.querySelector("#usernamesu").value;
-            usernameReq = /(?=^[A-Za-z])(?=^.{6,64}$).*$/
-            if (!username.match(usernameReq)) {
-                document.querySelector("#usernamesuInvalid").innerHTML = "Username requirements not met";
-                document.querySelector('#usernamesu').className = "form-control is-invalid";
+        // document.querySelector('#usernamesu').onblur = () => {
+        //     document.querySelector('#usernamereq').style.visibility = 'hidden';
+        //     username = document.querySelector("#usernamesu").value;
+        //     // usernameReq = /(?=^[A-Za-z])(?=^.{6,64}$).*$/
+        //     // if (!username.match(usernameReq)) {
+        //     //     document.querySelector("#usernamesuInvalid").innerHTML = "Username requirements not met";
+        //     //     document.querySelector('#usernamesu').className = "form-control is-invalid";
 
-            }
-        }
+        //     // }
+        // }
         document.querySelector('#passwordsu').onfocus = () => {
             document.querySelector('#passreq').style.visibility = 'visible';
 
