@@ -81,10 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     document.querySelector('#usernamesu').onfocus = () => {
         document.querySelector('#usernamereq').style.visibility = 'visible';
-        
+        document.querySelector("#noEntry").innerHTML = ""
     };
     document.querySelector('#usernamesu').onblur = () => {
         document.querySelector('#usernamereq').style.visibility = 'hidden';
+        username = document.querySelector("#usernamesu").value;
+        usernameReq = /(?=^[A-Za-z])(?=^.{6,64}$).*$/
+        if(!username.match(usernameReq)){
+            document.querySelector("#noEntry").innerHTML = "You did not meet the username requirements\n"
+        }
     }
-
+    document.querySelector('#passwordsu').onfocus = () => {
+        document.querySelector('#passreq').style.visibility = 'visible';
+        
+    };
+    document.querySelector('#passwordsu').onblur = () => {
+        document.querySelector('#passreq').style.visibility = 'hidden';
+        password = document.querySelector("#passwordsu").value;
+        passwordReq = /(?=^[A-Za-z])(?=^.{8,330}$)(?=.*[!@#$%^&*]+)(?=^\S+$)(?=.*\d{1,})(?=.*[a-z]{1,})(?=.*[A-Z]{1,}).*$/
+        if(!password.match(passwordReq)){
+            //alert("You did not meet the password requirements")
+        }
+    }
+    
 });
