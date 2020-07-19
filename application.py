@@ -97,6 +97,8 @@ def createUser():
         return ("passwords didn't match")
     elif(not re.match("(?=^[A-Za-z])(?=^.{8,330}$)(?=.*[!@#$%^&*]+)(?=^\S+$)(?=.*\d{1,})(?=.*[a-z]{1,})(?=.*[A-Z]{1,}).*$",password)):
         return ("passwords does not meet the criteria")
+    elif(not re.match("(?=^[A-Za-z])(?=^.{6,64}$).*$",username)):
+        return ("username does not meet the criteria")
     else:
         db.execute("INSERT INTO users (username, password) VALUES (:username, :password)", {
                    "username": username, "password": hashedPassword})
