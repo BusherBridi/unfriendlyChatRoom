@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (username == "") {
             // alert("Please enter a username!")
             document.querySelector("#noEntry").innerHTML = "Please enter a username donkey"
-
         }
         if (password == "") {
             // alert("Please enter a password!")
@@ -80,4 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+    document.querySelector('#usernamesu').onfocus = () => {
+        document.querySelector('#usernamereq').style.visibility = 'visible';
+        
+    };
+    document.querySelector('#usernamesu').onblur = () => {
+        document.querySelector('#usernamereq').style.visibility = 'hidden';
+    }
+
 });

@@ -91,12 +91,15 @@ def createUser():
     passwordHash = hashlib.sha256()
     passwordHash.update(password.encode('utf8'))
     hashedPassword = str(passwordHash.hexdigest())
+    #makes sure user inputted password and username
     if(len(username) <= 0 or len(password) <= 0):
         return ("you must fill in all the fields")
     elif(password != passwordConf):
         return ("passwords didn't match")
+    #checks to make sure password matches reqs using a regex
     elif(not re.match("(?=^[A-Za-z])(?=^.{8,330}$)(?=.*[!@#$%^&*]+)(?=^\S+$)(?=.*\d{1,})(?=.*[a-z]{1,})(?=.*[A-Z]{1,}).*$",password)):
         return ("passwords does not meet the criteria")
+    #checks to make sure username matches reqs using a regex
     elif(not re.match("(?=^[A-Za-z])(?=^.{6,64}$).*$",username)):
         return ("username does not meet the criteria")
     else:
