@@ -113,10 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkAllValid()
             }
         }
-    //CHECK IF ALL FIELDS ARE VALID THEN ENABLE BUTTON
-    function checkAllValid(){
-        if(document.querySelectorAll("input.form-control.is-valid").length ==3){
+        //CHECK IF ALL FIELDS ARE VALID THEN ENABLE BUTTON
+    function checkAllValid() {
+        if (document.querySelectorAll("input.form-control.is-valid").length == 3) {
             console.log("all good")
+            document.querySelector("#signupBtn").disabled = false;
+            document.querySelector("#signupBtn").className = "btn btn-outline-primary";
+            document.querySelector("#signUpBtn").innerHTML = "Sign Up";
         }
     }
 
