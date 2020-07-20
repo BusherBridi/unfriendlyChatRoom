@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     //END CHANGE HTTPS TO HTTP
 
-    isvalidusername = false;
-    isvalidpassword = false;
-    isvalidpasswordconf = false;
 
     //BEGIN DISBABLE SIGN UP BUTTON
     document.querySelector("#signupBtn").disabled = true;
@@ -51,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             document.querySelector("#usernamesuValid").innerHTML = "Username is avaliable"
                             document.querySelector('#usernamesu').className = "form-control is-valid";
                             document.querySelector('#loadingBtn').style = "display:none;";
-                            isvalidusername = true;
+                            checkAllValid()
                         }
                     }
                     //Add data to request:
@@ -103,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#passwordsu").className = "form-control is-invalid";
         } else {
             document.querySelector("#passwordsu").className = "form-control is-valid";
-            isvalidpassword = true;
+            checkAllValid()
         }
     }
     document.querySelector('#passwordsuConf').oninput = () => {
@@ -113,9 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("#passwordsuConf").className = "form-control is-invalid";
             } else if (password === passwordConf) {
                 document.querySelector("#passwordsuConf").className = "form-control is-valid";
-                isvalidpasswordconf = true;
+                checkAllValid()
             }
         }
-        //CHECK IF ALL FIELDS ARE VALID THEN ENABLE BUTTON
+    //CHECK IF ALL FIELDS ARE VALID THEN ENABLE BUTTON
+    function checkAllValid(){
+        if(document.querySelectorAll("input.form-control.is-valid").length ==3){
+            console.log("all good")
+        }
+    }
 
 });
