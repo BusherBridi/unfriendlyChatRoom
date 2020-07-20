@@ -77,6 +77,19 @@ def dashboard():
         return render_template("dashboard.html", username=session["user_info"]["username"])
     else:
         return redirect(url_for('index'))
+# userpage route
+@app.route("/<string:username>")
+def userpage(username):
+    isuserexist = db.execute("SELECT * FROM users WHERE username =:username",{"username":username}).rowcount
+    if( isuserexist != 1):
+        return render_template("error.html"), 404
+    else:
+        user = db.execute("SELECT * FROM users WHERE username =:username",{"username":username}).fetchone()
+        bio = user.bio
+        url = user.url
+        profilePic = user.profilepicurl
+        location = user.location
+    return render_template("userpage.html",user=username, bio=bio, url=url, profilepic= profilePic, location=location)   
 #logout API
 @app.route("/logout")
 def logout():
