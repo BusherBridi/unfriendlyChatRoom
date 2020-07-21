@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import scoped_session, sessionmaker
-import hashlib
+import hashlib, re
 
 application = app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -19,13 +19,6 @@ db = scoped_session(sessionmaker(bind=engine))
 
 # Set up socket
 socketio = SocketIO(app)
-
-#Set up emoji list using the file names of the images found in /assets
-emojis = []
-for filename in os.listdir('static/assets'):
-    if(filename.endswith('.png')):
-        emojis.append(filename[:-4])
-
 
 @app.route("/")
 def index():
@@ -77,20 +70,32 @@ def createUser():
         return ("User Created")
     return "error"
 
-@app.route("/getEmojis", methods = ['GET'])
-def getEmojis():
-    return jsonify(emojis);
 
 @socketio.on("post message")
 def message(data):
     msg = data["message"]
     user = data["user"]
 
-    if(msg == "!emojis"):
-        user = "Server"
-        msg = "<br>"
-        for emo in emojis:
-            msg += "-" + emo + "<br>"
+    print(re.search(':([A-Za-z0-9_\./\\-]*):', msg))
+
+    i = 0;
+    while i < len(msg):
+        emo = re.search(':([A-Za-z0-9_\./\\-]*):', msg, i)
+        if(emo == None):
+            break;
+
+        #url = "https://www.google.com/search?q=" + emo.group(1) + "&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiQyoDsst7qAhWRMX0KHbNMDw4Q_AUoAXoECBwQAw&biw=1038&bih=852"
+        #print(url)
+        link = "https://picsum.photos/50"
+        img = "<img src=" + link + ">"
+
+        msg = msg.replace(emo.group(), img)
+
+        #print(emo.start())
+        #print(emo.end())
+        i += len(img);
+
+
 
 
     emit("broadcast message", {"message":msg, "user":user}, broadcast=True)

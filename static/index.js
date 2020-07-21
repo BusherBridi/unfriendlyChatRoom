@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     };
+    
     document.querySelector("#signupBtn").onclick = () => {
         const password = document.querySelector("#passwordsu").value;
         const passwordConf = document.querySelector("#passwordsuConf").value;
