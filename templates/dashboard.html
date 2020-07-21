@@ -1,17 +1,29 @@
 <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename = 'dashboard.css')}}"> {% extends "layout.html" %} {% block heading%} {{username}}'s Dashboard {% endblock %} {% block body%}
+<link rel="stylesheet" href="{{url_for('static', filename = 'dashboard.css')}}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> {% extends "layout.html" %} {% block heading%} {{username}}'s Dashboard {% endblock %} {% block body%}
+
 <div class="container">
     <div class="row">
         <!-- BEGIN PROFILE PIC  -->
         <div class="align-self-center col-6 col-md-4">
             <div id="profilePicSection">
-                <img src="../static/DELETEMEBEFOREPUSHING.jpg" alt="Profile Picture" id="profilePic">
+                <img src="" alt="Profile Picture" id="profilePic">
                 <div class="text-body" id="changePic">Change Picture</div>
                 <input type="file" id="profilePicUpload">
+            </div>
+            <div id="uploadSection" class="inputField">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Picture URL</span>
+                    </div>
+                    <input type="text" class="form-control" id="picurl" placeholder="https://google.com/clown">
+                </div>
+                <button type="button" class="btn btn-outline-primary" id="changePicBtn">Change Profile Picture</button>
             </div>
         </div>
         <!-- END PROFILE PIC -->
         <div class="col-sm">
+
             <div id="personalInfo">
                 <!-- BEGIN BIO -->
                 <div id="bio" class="inputField">
@@ -46,7 +58,7 @@
                     </div>
                 </div>
                 <!-- END URL -->
-                <!-- BEGIN URL-->
+                <!-- BEGIN Location-->
                 <div id="url" class="inputField">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
@@ -56,11 +68,13 @@
                         <small class="text-muted" id="locationHelp">SWAT team inbound</small>
                     </div>
                 </div>
-                <!-- END URL -->
+
+                <!-- END Location -->
                 <!-- BEGIN SAVE BUTTON -->
                 <div id="submitDiv">
-                    <button type="button" class="btn btn-outline-primary">Save Changes</button>
+                    <button type="button" class="btn btn-outline-primary" id="saveBtn">Save Changes</button>
                 </div>
+
                 <!-- END SAVE BUTTON -->
             </div>
         </div>

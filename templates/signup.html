@@ -10,13 +10,13 @@
                     <label for="usernamesu">Username: </label>
                     <input type="text" id="usernamesu" name="usernamesu" autocomplete="off" class="form-control" required>
                     <small id="noEntry"></small>
-                    <div class="valid-feedback">
-                        Username is avaliable
+                    <small class="text-muted" id="usernamereq">Must start with a letter and be between 6-64 characters</small><br>
+                    <div class="valid-feedback" id="usernamesuValid">
+
                     </div>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" id="usernamesuInvalid">
                         Username is already taken
                     </div>
-                    <button type="button" id="checkUsername" class="btn btn-primary ">Check if username is avaliable</button>
                     <div class="text-center" id="loadingAnimation">
                         <button class="btn btn-primary" type="button" disabled id="loadingBtn">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -28,7 +28,8 @@
                 <div>
                     <label for="passwordsu">Password: </label>
                     <input type="password" id="passwordsu" name="passwordsu" class="form-control" required>
-                    <div class="invalid-feedback">
+                    <small class="text-muted" id="passreq">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+                    <div class="invalid-feedback" id="passwordsuInvalid">
                         Do you think this is a good password?
                     </div>
                 </div>
