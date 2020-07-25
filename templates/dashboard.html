@@ -1,41 +1,83 @@
-<!DOCTYPE html>
-<html>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+<link rel="stylesheet" href="{{url_for('static', filename = 'dashboard.css')}}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> {% extends "layout.html" %} {% block heading%} {{username}}'s Dashboard {% endblock %} {% block body%}
 
-<head>
-    <title>
-        UnFriendly Chat
-    </title>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<div class="container">
+    <div class="row">
+        <!-- BEGIN PROFILE PIC  -->
+        <div class="align-self-center col-6 col-md-4">
+            <div id="profilePicSection">
+                <img src="" alt="Profile Picture" id="profilePic">
+                <div class="text-body" id="changePic">Change Picture</div>
+                <input type="file" id="profilePicUpload">
+            </div>
+            <div id="uploadSection" class="inputField">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Picture URL</span>
+                    </div>
+                    <input type="text" class="form-control" id="picurl" placeholder="https://google.com/clown">
+                </div>
+                <button type="button" class="btn btn-outline-primary" id="changePicBtn">Change Profile Picture</button>
+            </div>
+        </div>
+        <!-- END PROFILE PIC -->
+        <div class="col-sm">
 
-    <!-- UNCOMMENT FOR DEBUGGING -->
-    <!-- <link rel="stylesheet" href="../static/styles.css">
-    <script src="../static/dashboard.js" charset="utf-8"></script> -->
-</head>
+            <div id="personalInfo">
+                <!-- BEGIN BIO -->
+                <div id="bio" class="inputField">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Bio</span>
+                        </div>
+                        <textarea type="text" class="form-control" id="bioText" placeholder="Spare us the details"></textarea>
+                        <small class="text-muted" id="bioHelp">In reality, nobody cares...</small>
+                    </div>
+                </div>
+                <!-- END BIO -->
+                <!-- BEGIN ANNOUCMENT -->
+                <div id="annou" class="inputField">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Announcement</span>
+                        </div>
+                        <input type="text" class="form-control" id="announcement" placeholder="https://i.imgur.com/QASOJat.gif">
+                        <small class="text-muted" id="annouHelp">This will be broadcasted when you join a chat room</small>
+                    </div>
+                </div>
+                <!-- END ANNOUCMENT -->
+                <!-- BEGIN URL-->
+                <div id="url" class="inputField">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">URL</span>
+                        </div>
+                        <input type="text" class="form-control" id="urlText" placeholder="https://github/:(">
+                        <small class="text-muted" id="urlHelp">Take us to your leader</small>
+                    </div>
+                </div>
+                <!-- END URL -->
+                <!-- BEGIN Location-->
+                <div id="url" class="inputField">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                        </div>
+                        <input type="text" class="form-control" id="locationText" placeholder="Ninth Circle of Hell">
+                        <small class="text-muted" id="locationHelp">SWAT team inbound</small>
+                    </div>
+                </div>
 
-<body>
-    <h3>Hello, <span id="username">{{username}}</span></h3>
+                <!-- END Location -->
+                <!-- BEGIN SAVE BUTTON -->
+                <div id="submitDiv">
+                    <button type="button" class="btn btn-outline-primary" id="saveBtn">Save Changes</button>
+                </div>
 
-    <ul id="messages" class="chat"></ul>
-
-    <div class="messageBar" id="help">
-
-        <select name="theme" id="themeSelect" class="theme">
-        <option value="basic">Basic</option>
-        <option value="mustard">Mustard Pen</option>
-        <option value="dark">Dark Mode</option>
-        <option value="vibe">Vibe</option>
-      </select>
-
-        <div class="messageField" id="">
-            <label for="message">Message: </label>
-            <input type="text" id="message" name="message" autocomplete="off">
-            <button id="sendMessage">Send</button>
+                <!-- END SAVE BUTTON -->
+            </div>
         </div>
     </div>
-
-
-</body>
-
-</html>
+</div>
+{% endblock %}

@@ -1,34 +1,58 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 <script src="{{ url_for('static', filename='signup.js') }}"></script>
-<link rel="stylesheet" href="{{url_for('static', filename = 'signup.css')}}">
-{% extends "layout.html" %}
-{% block heading%}
-Sign Up
-{% endblock %}
+<link rel="stylesheet" href="{{url_for('static', filename = 'signup.css')}}"> {% extends "layout.html" %} {% block heading%} Sign Up {% endblock %} {% block body%}
+<div class="container">
+    <div class="row">
+        <!-- BEGIN SIGN UP FORM -->
+        <form action="{{url_for('createUser')}}" method="post" id="signup">
+            <div class="form-group">
+                <div>
+                    <label for="usernamesu">Username: </label>
+                    <input type="text" id="usernamesu" name="usernamesu" autocomplete="off" class="form-control" required>
+                    <small id="noEntry"></small>
+                    <small class="text-muted" id="usernamereq">Must start with a letter and be between 6-64 characters</small><br>
+                    <div class="valid-feedback" id="usernamesuValid">
+
+                    </div>
+                    <div class="invalid-feedback" id="usernamesuInvalid">
+                        Username is already taken
+                    </div>
+                    <div class="text-center" id="loadingAnimation">
+                        <button class="btn btn-primary" type="button" disabled id="loadingBtn">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Checking...
+                  </button>
+                    </div>
+                </div>
+                <br></br>
+                <div>
+                    <label for="passwordsu">Password: </label>
+                    <input type="password" id="passwordsu" name="passwordsu" class="form-control" required>
+                    <small class="text-muted" id="passreq">Use 8 or more characters with a mix of letters, numbers & symbols</small>
+                    <div class="invalid-feedback" id="passwordsuInvalid">
+                        Do you think this is a good password?
+                    </div>
+                </div>
+                <div>
+                    <label for="passwordsuConf">Confirm Password: </label>
+                    <input type="password" id="passwordsuConf" name="passwordsuConf" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Passwords don't match
+                    </div>
+                </div>
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>
-        Sign Up
-    </title>
-    <script></script>
+                <button type="button" id="signupBtn" class="btn btn-outline-success"> Sign up</button>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="button" disabled id="creatingUser">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Creating User...
+                  </button>
+                </div>
+        </form>
+        <!-- END SIGN UP FORM -->
 
+        </div>
+    </div>
 
-{% block body%}
-    <form action="{{url_for('createUser')}}" method="post" id="signup">
-        <label for="usernamesu">Username: </label>
-        <input type="text" id="usernamesu" name="usernamesu" autocomplete="off">
-        <small id="alreadyExists"></small>
-        <button type="button" id="checkUsername">Check if username is avaliable</button>
-
-        <label for="passwordsu">Password: </label>
-        <input type="password" id="passwordsu" name="passwordsu">
-
-        <label for="passwordsuConf">Confirm Password: </label>
-        <input type="password" id="passwordsuConf" name="passwordsuConf">
-        <small id="passwordError"></small>
-
-        <button type="button" id="signupBtn"> Sign up</button>
-    </form>
-    <h3 id="creatingUser"></h3>
-{% endblock %}
+    {% endblock %}
