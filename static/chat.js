@@ -55,8 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get username
     const username = document.querySelector("#username").innerHTML;
 
-    //Broadcast msg:
+    //Update online users list with new user
+  //  socket.emit('user connected', { 'uname': username });
 
+    //Update Online List for everyone
+    socket.emit('update online list');
+
+
+    //Broadcast msg:
     document.querySelector('#sendMessage').onclick = () => {
         const msg = document.querySelector("#message").value;
         if (msg == "") {
@@ -65,18 +71,35 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('post message', { 'message': msg, 'user': username })
             console.log("sending message: " + msg);
             document.querySelector("#message").value = "";
+            socket.emit('update online list');
         };
     }
+
     document.querySelector("#message").addEventListener("keyup", event => {
         if (event.key !== "Enter") return;
         document.querySelector("#sendMessage").click();
         event.preventDefault();
     });
+
     socket.on('broadcast message', data => {
         const li = document.createElement('li');
         console.log(`getting message: ${data.msg}`)
         li.innerHTML = `${data.user}: ${data.message}`;
         document.querySelector("#messages").append(li);
         document.querySelector("#messages *:last-child").scrollIntoView();
-    })
+    });
+
+    socket.on('add new online', data => {
+        const item = document.createElement('li');
+        item.innerHTML = `${data.uname}`;
+        document.querySelector("#onlineUsers").append(item);
+    });
+
+
+    socket.on('send username', () => {
+        //let username = document.querySelector("#username").innerHTML
+        document.querySelector("#onlineUsers").innerHTML = "";
+        socket.emit('pass username', {'uname' : username});
+    });
+
 });

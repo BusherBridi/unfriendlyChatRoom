@@ -1,12 +1,13 @@
 body {
   background-image: url('king.png');
   height: 100%;
+  width: 100%;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .chat {
   height: 100%;
-  margin-top: 0;
-  margin-bottom: 5%;
+  margin: 0 15% 0 0;
 }
 
 .messageBar {
@@ -22,11 +23,17 @@ body {
 
 .messageField {
   margin-left: 30%;
-
 }
 
 .theme {
   float: left;
+}
+
+.onlineUsersList {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 5% 7% 5% 5%;
 }
 
 #message {

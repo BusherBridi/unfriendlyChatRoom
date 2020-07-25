@@ -19,6 +19,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 # Set up socket
 socketio = SocketIO(app)
+connectedUsers = []
 
 # Homepage/index route
 @app.route("/")
@@ -89,7 +90,7 @@ def userpage(username):
         url = user.url
         profilePic = user.profilepicurl
         location = user.location
-    return render_template("userpage.html",user=username, bio=bio, url=url, profilepic= profilePic, location=location)   
+    return render_template("userpage.html",user=username, bio=bio, url=url, profilepic= profilePic, location=location)
 #logout API
 @app.route("/logout")
 def logout():
@@ -121,6 +122,7 @@ def createUser():
         db.commit()
         return ("User Created")
     return "error"
+
 
 # username check API
 @app.route("/checkUsername", methods=["POST"])
@@ -160,7 +162,7 @@ def savechanges():
     except:
         data = jsonify({"saved":False})
     return data
-    
+
 # Save profilePicUrl to db API
 @app.route("/changePic", methods = ["POST"])
 def changePic():
@@ -180,6 +182,26 @@ def message(data):
     msg = data["message"]
     user = data["user"]
     emit("broadcast message", {"message":msg, "user":user}, broadcast=True)
+
+""" this should be a comment omega
+@socketio.on("user connected")
+def emitNewOnlineUser(data):
+    uname = data["uname"]
+    emit("add new online", {"user":uname}, broadcast=True)
+    emit("get usernames", {"newUserId" : },broadcast=False)
+
+@socketio.on("emit username")
+def getOnlineList(data):
+
+"""
+
+@socketio.on("update online list")
+def updateOnline():
+    emit("send username", broadcast=True)
+
+@socketio.on("pass username")
+def updateUsers(data):
+    emit("add new online", {"uname" : data["uname"]}, broadcast=True)
 
 if __name__ == "__main__":
     app.run()
