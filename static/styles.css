@@ -7,7 +7,7 @@ body {
 
 .chat {
   height: 100%;
-  margin: 0 15% 0 5%;
+  margin: 0 15% 0 0;
 }
 
 .messageBar {
