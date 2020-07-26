@@ -18,6 +18,10 @@
 <body>
     <h3>Hello, <span id="username">{{username}}</span></h3>
 
+    <audio src="{{ url_for('static', filename='notification.mp3') }}" id="notif">
+
+    </audio>
+
     <div class="onlineUsersList">
       Online:
       <ul id="onlineUsers">

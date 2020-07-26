@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // Get username
     const username = document.querySelector("#username").innerHTML;
+    var aud = document.getElementById("notif");
 
     //Update online users list with new user
   //  socket.emit('user connected', { 'uname': username });
@@ -87,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
         li.innerHTML = `${data.user}: ${data.message}`;
         document.querySelector("#messages").append(li);
         document.querySelector("#messages *:last-child").scrollIntoView();
+        aud.pause();
+        aud.currentTime = 0;
+        aud.play();
     });
 
     socket.on('add new online', data => {
